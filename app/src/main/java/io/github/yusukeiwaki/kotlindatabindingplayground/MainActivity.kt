@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import io.github.yusukeiwaki.kotlindatabindingplayground.databinding.ActivityMainBinding
 import io.realm.Realm
-import io.realm.Sort
 
 class MainActivity : Activity() {
 
@@ -33,7 +32,7 @@ class MainActivity : Activity() {
 
     private fun updateView() {
         Realm.getDefaultInstance().use { realm ->
-            realm.where(User::class.java).sort("id", Sort.DESCENDING).findFirst()?.let { user ->
+            realm.where(User::class.java).findAll().last()?.let { user ->
                 binding.lastUser = realm.copyFromRealm(user)
             }
         }
